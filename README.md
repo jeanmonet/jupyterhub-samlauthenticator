@@ -19,6 +19,16 @@ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 --->
+# Modified version of original abandonned repo: working with JupyterHub 5
+
+Modifications introduced in `samlauthenticator.py`:
+
+- Compatibility with SP-initiated login: integrating PR https://github.com/HewlettPackard/jupyterhub-samlauthenticator/pull/67 and some additional changes to the SAMLRequest (these may need to be customized to work wity your IdP's requirements).
+
+- Fixes `_xsrf` issue reported here: https://github.com/HewlettPackard/jupyterhub-samlauthenticator/issues/72.
+
+- Some additional small changes to make it compatible with JupyterHub 5.
+
 # SAMLAuthenticator for JupyterHub
 
 [![Build Status](https://travis-ci.com/bluedatainc/jupyterhub-samlauthenticator.svg?branch=master)](https://travis-ci.com/bluedatainc/jupyterhub-samlauthenticator)
