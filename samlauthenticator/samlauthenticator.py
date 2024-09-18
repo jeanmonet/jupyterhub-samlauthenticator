@@ -334,7 +334,7 @@ class SAMLAuthenticator(Authenticator):
         allow_none=True,
         config=True,
         help='''
-        Additional parsing of the username from the SAML response.
+        Additional parsing of the username from the SAML response (called after normalize_username(...)).
         '''
     )
     _const_warn_explain       = 'Because no user would be allowed to log in via roles, role check disabled.'
@@ -763,9 +763,6 @@ class SAMLAuthenticator(Authenticator):
 
         redirect_url = authenticator_self._get_redirect_from_metadata(element_name, handler_self)
 
-        # xsrf_token = handler_self.xsrf_token.decode()
-        # handler_self.log.debug('Setting XSRF token: ' + xsrf_token)
-
         # Here permanent MUST BE False - otherwise the /hub/logout GET will not be fired
         # by the user's browser.
         if add_authn_request:
@@ -880,7 +877,7 @@ class SAMLAuthenticator(Authenticator):
         class SAMLLoginHandler(LoginHandler):
 
             async def get(login_handler_self):
-                login_handler_self.log.info('Starting SP-initiated SAML Login (we are in SAMLLoginHandler)')
+                login_handler_self.log.info('Starting SP-initiated SAML Login (in SAMLLoginHandler')
                 authenticator_self._get_redirect_from_metadata_and_redirect(
                     'md:SingleSignOnService',
                     login_handler_self,
@@ -944,6 +941,7 @@ class SAMLAuthenticator(Authenticator):
             def check_xsrf_cookie(self):
                 self.log.debug(f"Skip xsrf check in {self.__class__.__name__}")
                 return None
+
 
         class SAMLMetaHandler(BaseHandler):
 
